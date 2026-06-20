@@ -163,14 +163,14 @@ To validate the model's true comprehension vs. shallow pattern matching, the fin
 - **3 Specific Failure Case Studies:** An in-depth analysis of at least three specific wrong predictions. Each analysis will be explicitly tied to our data constraints, the specific label boundary crossed, or the model's token behavior (rather than a generic "it got it wrong" statement).
 - **A Failure Pattern Reflection:** A deep diagnostic reflection evaluating the gap between what the model captured and what was intended. This will explicitly target a specific systemic failure pattern (such as a recurring label pair confusion, a specific post length issue, or a distributional blind spot) to guide the next phase of training refinement.
 
-### 4. The Validation Split Protocol
+### 4. The Train/Test Split Protocol
 
-Because the entire dataset is exactly 200 items, we cannot afford to lose massive amounts of data to a static train/test split. We will deploy an **85/15 Stratified Split**:
+For simplicity and reproducibility, we use a single **80/20 split** with a **class-balanced test set**:
 
-- **170 Rows:** Training data.
-- **30 Rows:** Validation data (exactly 10 rows from each of the 3 classes).
+- **160 Rows:** Training data.
+- **40 Rows:** Test data (~13 per class), touched only once for the final reported numbers.
 
-Using a stratified split guarantees that the validation pool contains a perfectly equal distribution of all three labels, preventing our metric calculations from becoming statistically distorted.
+We chose 20% over the common 15% because 15% of 200 is only 30 items, where a single error swings a per-class metric sharply; 40 is more stable while still leaving 160 to train on. The balanced split keeps per-class metrics clean, though at n=40 the numbers remain indicative rather than precise.
 
 ## Definition of Success
 
@@ -180,4 +180,4 @@ Success is defined relative to the **Groq `llama-3.3-70b` zero-shot baseline**, 
 - **Per-class F1 ≥ 0.70 for every label.** No single class may collapse. A class scoring near 0 signals an unlearned boundary or inconsistent labeling rather than a usable model.
 - **A diagnosable error pattern, not random failure.** The confusion matrix should show errors concentrated in the predicted hard case (`CRAFT_EVALUATION` ↔ `THEMATIC_INTERPRETATION` on "Tool-to-Meaning" hybrids), confirming the model learned real distinctions and failed only where we expected it to.
 
-> **Note on scale:** With only 30 test items (10 per class), a single misclassification moves a per-class F1 by ~10 points. These thresholds are therefore treated as indicative targets, and the qualitative error analysis (§3 above) carries as much weight as the raw numbers.
+> **Note on scale:** With only 40 test items (~13 per class), a single misclassification moves a per-class F1 by several points. These thresholds are therefore treated as indicative targets, and the qualitative error analysis (§3 above) carries as much weight as the raw numbers.

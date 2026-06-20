@@ -181,3 +181,19 @@ Success is defined relative to the **Groq `llama-3.3-70b` zero-shot baseline**, 
 - **A diagnosable error pattern, not random failure.** The confusion matrix should show errors concentrated in the predicted hard case (`CRAFT_EVALUATION` ↔ `THEMATIC_INTERPRETATION` on "Tool-to-Meaning" hybrids), confirming the model learned real distinctions and failed only where we expected it to.
 
 > **Note on scale:** With only 40 test items (~13 per class), a single misclassification moves a per-class F1 by several points. These thresholds are therefore treated as indicative targets, and the qualitative error analysis (§3 above) carries as much weight as the raw numbers.
+
+## AI Tool Plan
+
+This project generates no code, so AI tools are used at three specific points in the data and evaluation workflow rather than for implementation.
+
+### 1. Label Stress-Testing
+
+I will use **Claude** for this, run before any annotation begins. I will paste in the label definitions and edge cases and ask it to generate 5–10 posts that sit on the boundary between two labels (especially `CRAFT_EVALUATION` vs. `THEMATIC_INTERPRETATION`). If I cannot classify its output cleanly using my own rules, that exposes a gap in the definitions, and I will tighten them before labeling all 200 examples.
+
+### 2. Annotation Assistance
+
+I will use the **Groq `llama-3.3-70b`** model (already in the stack) to pre-label batches of collected posts, which I then review and correct by hand. Every pre-labeled row is flagged with a `pre_labeled = TRUE` column in the spreadsheet so the AI-assisted items are tracked for disclosure in my AI usage section. The final label on every example is my own human decision, not the model's.
+
+### 3. Failure Analysis
+
+After evaluation, I will give **Claude** the list of wrong predictions (text, true label, predicted label) and ask it to spot recurring patterns. I will specifically look for a dominant confused label pair, a post type that fails often, or a length-related blind spot. I will verify any pattern it claims by checking it against the confusion matrix and re-reading the actual posts before writing it into my report.

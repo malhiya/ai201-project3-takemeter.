@@ -134,6 +134,13 @@ Evaluating a text classification model on a compact, highly balanced dataset (20
 
 To ensure the fine-tuned model meaningfully exceeds the baseline and learns the precise boundaries between our categories, the evaluation pipeline will track and generate a comprehensive suite of per-class and structural metrics.
 
+**Two models are evaluated on the identical held-out test set** and reported side by side:
+
+1. **Fine-tuned DistilBERT** — trained on our 200 labeled examples.
+2. **Groq `llama-3.3-70b` (zero-shot baseline)** — given only the label definitions in its prompt, with no training.
+
+For both models we report overall accuracy and per-class F1, so the results directly answer the project's core question: *does fine-tuning a small model on our own data beat simply prompting a large general-purpose one?*
+
 ### 1. Core Metrics Matrix
 
 | Metric | How It Is Measured | Why It Is Crucial For This Task |

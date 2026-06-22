@@ -30,6 +30,25 @@ Compact, one-sentence definitions optimized for a zero-shot LLM prompt. These le
 
 ---
 
+## Data Collection
+
+Data Sources
+Posts and comments were collected manually from a mix of r/TrueFilm, r/movies, and various online movie review articles to gather a diverse range of film discourse.
+
+Labeling Process
+Each example was hand-copied into a CSV file. Labels were assigned based on the author's primary intent. For hybrid posts that blended multiple styles, the label was assigned based on the ultimate target of the post—whether the author was primarily trying to evaluate technical craft, decode meaning, or express a personal reaction. A strict labeling guide was used to resolve edge cases and keep categories consistent.
+
+Label Distribution
+craft_evaluation: 78 posts
+
+thematic_interpretation: 66 posts
+
+audience_experience: 56 posts
+
+Total: 200 posts
+
+---
+
 ## Baseline Description
 
 The zero-shot baseline used Groq's llama-3.3-70b-versatile model with no task-specific training. Each test example was passed to the model with the following system prompt:

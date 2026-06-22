@@ -94,6 +94,40 @@ We resolve this ambiguity by determining the **ultimate target** of the sentence
 
 ---
 
+## Hard Edge Cases (From Annotation)
+
+Three specific examples from the dataset that were genuinely difficult to label, and the decision made on each.
+
+### Example 1: *The Dark Knight* (2008)
+
+> **User Review:** "The Joker's monologue about chaos isn't just terrifying because of Heath Ledger's twitchy performance; it reveals the terrifying truth that our societal structures are incredibly fragile. But the movie cheats its own philosophical debate at the end. Batman forwards a massive, invasive sonar surveillance network to catch one guy, proving that the authoritarian surveillance state is the only functional defense against pure chaos. Lucius Fox threatens to resign over it, but he still uses it to help Batman win anyway, which completely undercuts the moral victory."
+
+- **The Labeling Dilemma:** `THEMATIC_INTERPRETATION` vs. `CRAFT_EVALUATION`
+- **Why it's difficult:** On one hand, the user is deeply engaged in decoding the ideological subtext of the film—specifically, how the narrative handles the philosophical clash between order, chaos, and state surveillance (`THEMATIC_INTERPRETATION`). On the other hand, the user highlights a mechanical flaw in how the screenplay executes this debate, arguing that the script "cheats" and "undercuts" its own resolution through plot contrivances (`CRAFT_EVALUATION`).
+- **The Verdict:** It leans slightly closer to `THEMATIC_INTERPRETATION` because the ultimate weight of the critique is focused on the political and moral *message* the film leaves behind, rather than just the logical pacing of the third act.
+
+---
+
+### Example 2: *Mad Max: Fury Road* (2015)
+
+> **User Review:** "I was completely exhausted by the time the film reached its halfway point. George Miller constructs this unrelenting, hyper-kinetic desert chase where the editing cuts every fraction of a second, forcing your eyes to constantly track the center of the frame. It's an absolute masterclass in visual storytelling, but the sheer velocity and lack of narrative breathing room left me feeling detached and physically overwhelmed rather than thrilled."
+
+- **The Labeling Dilemma:** `CRAFT_EVALUATION` vs. `AUDIENCE_EXPERIENCE`
+- **Why it's difficult:** The user relies heavily on the language of physical sensation and internal emotional states (*"exhausted," "detached," "physically overwhelmed"*), which strongly points to `AUDIENCE_EXPERIENCE`. However, they explicitly link every single one of these visceral responses to specific, technical filmmaking choices—noting cross-cutting techniques, spatial framing, and editing pacing (*"cuts every fraction of a second, forcing your eyes to constantly track the center"*), which is textbook `CRAFT_EVALUATION`.
+- **The Verdict:** It leans closer to `CRAFT_EVALUATION`. The user isn't just having a passive emotional reaction; they are actively diagnosing *how* the mechanical engine of the film's post-production editing directly manufactured that sensory fatigue.
+
+---
+
+### Example 3: *Get Out* (2017)
+
+> **User Review:** "The Sunken Place is brilliant because it perfectly visualizes the historical and ongoing paralysis of systemic oppression. But looking at the actual narrative engine, Jordan Peele uses the hypnosis sequence as a brilliant screenplay shortcut. By paralyzing Chris in that void during the first act, the film efficiently establishes an unspoken, looming threat that heightens the tension of every standard conversational scene that follows without needing overt physical violence early on."
+
+- **The Labeling Dilemma:** `THEMATIC_INTERPRETATION` vs. `CRAFT_EVALUATION`
+- **Why it's difficult:** The user starts by isolating one of the most culturally significant allegorical symbols in modern cinema, explicitly interpreting its sociological meaning regarding racial trauma (`THEMATIC_INTERPRETATION`). However, they immediately pivot to analyzing that exact same symbol as a purely pragmatic screenwriting tool, examining how it functions as a pacing mechanism to manufacture suspense and alter the narrative stakes (`CRAFT_EVALUATION`).
+- **The Verdict:** It is an almost perfect 50/50 split. The review seamlessly treats a single cinematic element simultaneously as an ideological text and a structural tool, making it incredibly difficult to isolate one primary label without discarding half of the user's analytical intent.
+
+---
+
 ## Data Collection Plan
 
 To compile the dataset of 200 high-quality, text-heavy examples, data will be collected manually via copy-pasting into a spreadsheet. This keeps the researcher close to the raw data, helping to internalize the linguistic boundaries and nuance of the community before the LoRA training begins.
